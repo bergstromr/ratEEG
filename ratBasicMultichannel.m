@@ -5,9 +5,9 @@
 %%
 
 
-clear global               % clear all variables
+clear all               % clear all variables
 
-
+tic
 
 files = dir('*.mat');  
 disp('files in pathway:       ')  
@@ -39,7 +39,7 @@ h = input ('baseline file:    ');
 
     %For UW Madison Data: 
     f = 1024; %sampling rate is 1024 Hz
-    CH = 4; %update as needed
+    CH = 32; %update as needed
     win0 = 256; %250 ms = 1024/4
     DC = 4; %need to also try 4?
     
@@ -186,7 +186,7 @@ for k = h
             clear Decomp rows Dist LLength LLStart LL_a y yy C L
         end
 %%
-    %clear EEG 
+    clear EEG 
  
 %%
     
@@ -198,7 +198,7 @@ end
 %     BaseStats(1,:) = BaseStatMedian;
 %     BaseStats(2,:) = BaseStatStDev;
     
-     BaseStats = [BaseStatMedian; BaseStatStDev]
+     BaseStats = [BaseStatMedian; BaseStatStDev];
 %else
  %   BaseStats(1,:) = BaseStatMedian;
   %  BaseStats(2,:) = BaseStatStDev;
@@ -218,6 +218,8 @@ SF = 2.0;       % SF can be adjusted to increase or decrease the threshold
 %%
 for k = g
   %%
+  
+  
     load (files(k).name);
         input_name = files(k).name;            
         [~, name, ~] = fileparts (input_name); 
@@ -478,9 +480,9 @@ for k = g
                     end
         
                 SpAmp = SpMinMax(:,2)-SpMinMax(:,1);
-                    Abn0 = find(SpAmp <250);
+                    Abn0 = find(SpAmp <.250);
                         abnormal = short(Abn0,1:2)/f;
-                    Sp0 = find(SpAmp>=250);
+                    Sp0 = find(SpAmp>=.250);
                         spikes = short(Sp0,1:2)/f;    
                 else
                         spikes = [];
@@ -530,11 +532,13 @@ for k = g
                 SigSumm(k,col).channel = col; 
                 SigSumm(k,col).TotRecordLength = length(EEG)/f;
                % SigSumm(k,col).BulkSigScore = Thresholded(k);
+                SigSumm(k,col).BaseStats = BaseStats(:,col);
                 SigSumm(k,col).EventCounts = counts;
                 SigSumm(k,col).Spikes = spikes;
                 SigSumm(k,col).Seizure = seizures;
                 SigSumm(k,col).Abnormal = abnormal; 
                 SigSumm(k,col).EventTimeTotals = RealTotTime;
+                
                 
                 
         clear spHitssp spHitsabn spHitssz abnHitssp abnHitsabn ...
@@ -552,8 +556,9 @@ for k = g
 end  
 %% 
 
+toc
   
-  save ('A16SigSumm.mat', 'SigSumm')
+  save ('A1_SigSumm_Ch1-8.mat', 'SigSumm')
   
 
 
