@@ -165,7 +165,7 @@ for k = h
                 % LLength(rows-96-1) - Dist(rows-96-1)   
                     % takes the LL sum of previous window and subtracts
                     % the first Dist entry of that previous window
-            LLength(y,col) = LL_a + Dist(yy);
+            LLength(y) = LL_a + Dist(yy);
                 % Adds the next Dist entry to the new window 
                 % Modifies LLength with this new sum of dist in new window
         end
@@ -180,11 +180,13 @@ for k = h
                     % find median and standard deviation of calculated
                     % line lengths
        
-            BaseStatMedian(j,col) = median(LLength(:,col));
-            BaseStatStDev(j,col) = std(LLength(:,col));
+            BaseStatMedian(j,col) = median(LLength);
+            BaseStatStDev(j,col) = std(LLength);
+            
+            clear Decomp rows Dist LLength LLStart LL_a y yy C L
         end
 %%
-    clear EEG clean Decomp rows Dist LLength LLStart LL_a y yy C L
+    %clear EEG 
  
 %%
     
