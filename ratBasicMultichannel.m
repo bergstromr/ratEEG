@@ -81,7 +81,7 @@ for k = h
     
 %%
         load (files(k).name); % load the k/h-th (baseline) file in files 
-       % EEG = clean; % clean is the EEG variable, all channels.
+        %EEG = clean; % clean is the EEG variable, all channels.
   %%
   
         for col = 1:CH    
@@ -209,7 +209,7 @@ end
 
 %%
 
-SF = 2.0;       % SF can be adjusted to increase or decrease the threshold 
+SF = 4.0;       % SF can be adjusted to increase or decrease the threshold 
                 % used to determine if a line length is different from the 
                 % median baseline line length. SF is a multiplier and
                 % identifies how many standard deviations from the median a
@@ -533,6 +533,7 @@ for k = g
                 SigSumm(k,col).TotRecordLength = length(EEG)/f;
                % SigSumm(k,col).BulkSigScore = Thresholded(k);
                 SigSumm(k,col).BaseStats = BaseStats(:,col);
+                SigSumm(k,col).threshold = SF;
                 SigSumm(k,col).EventCounts = counts;
                 SigSumm(k,col).Spikes = spikes;
                 SigSumm(k,col).Seizure = seizures;
