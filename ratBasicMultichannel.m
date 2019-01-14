@@ -81,7 +81,7 @@ for k = h
     
 %%
         load (files(k).name); % load the k/h-th (baseline) file in files 
-        %EEG = clean; % clean is the EEG variable, all channels.
+       % EEG = clean; % clean is the EEG variable, all channels.
   %%
   
         for col = 1:CH    
