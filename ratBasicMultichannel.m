@@ -39,7 +39,7 @@ h = input ('baseline file:    ');
 
     %For UW Madison Data: 
     f = 1024; %sampling rate is 1024 Hz
-    CH = 32; %update as needed
+    CH = 4; %update as needed
     win0 = 256; %250 ms = 1024/4
     DC = 4; %need to also try 4?
     
@@ -115,7 +115,7 @@ for k = h
                     % "most information" while reducing noise.
 
 
-  %%                  
+                    
                     
                     % find distance between datapoints n and n-1
         Dist = zeros(rows,1); 
@@ -132,7 +132,7 @@ for k = h
                     % Ends at rows-6-1 and gives the abs diff between
                     % rows-6 and rows-6-1
             end
-     %%                              
+                                   
                     % sum distance between datapoints across window
            % LLength = zeros(length(Dist),col); 
                 % creates LLength full of a column of zeros that has a
@@ -146,7 +146,7 @@ for k = h
             LLength(1) = LLStart;
                 % modifies the first entry of LLength to the sum of line
                 % lengths of first window
-  %%              
+                
         for y = 2:rows-w 
             % this is the new LLength entry row, aka the 2nd window
                 % which is sum of Dist 2 to Dist 97
@@ -171,7 +171,7 @@ for k = h
         end
         %%
         
-        j = k-h(1)+1;
+      %  j = k-h(1)+1;
             % j = baseline file number in 'files' 
             % - first baseline file number in 'files' 
             % + 1, answer is 1 if there is only one baseline file 
@@ -180,15 +180,15 @@ for k = h
                     % find median and standard deviation of calculated
                     % line lengths
        
-            BaseStatMedian(j,col) = median(LLength);
-            BaseStatStDev(j,col) = std(LLength);
+            BaseStatMedian(1,col) = median(LLength);
+            BaseStatStDev(1,col) = std(LLength);
             
             clear Decomp rows Dist LLength LLStart LL_a y yy C L
         end
-%%
+
     clear EEG 
  
-%%
+
     
 end
 
