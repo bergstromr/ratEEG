@@ -39,7 +39,7 @@ h = input ('baseline file:    ');
 
     %For UW Madison Data: 
     f = 1024; %sampling rate is 1024 Hz
-    CH = 4; %update as needed
+    CH = 1; %update as needed
     win0 = 256; %250 ms = 1024/4
     DC = 4; %need to also try 4?
     
